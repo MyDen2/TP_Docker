@@ -42,3 +42,20 @@ def recuperer_liste_films_grace_genre():
             if ligne[3].lower() == genre.lower():
                 liste_films_genre.append(ligne)
     print(liste_films_genre)
+
+def recuperer_liste_entre_deux_annees():
+    liste_films_annees =[]
+    annee1 = input("Quel est la première année ?")
+    annee2 = input("Quel est la deuxième année ?")
+    if (not annee1.isnumeric()) | (not annee2.isnumeric()):
+        raise Exception("Les années doivent être un nombre !")
+    
+    with open("data/movies.csv", mode='r', encoding='utf-8') as fichier:
+        lecteur = csv.reader(fichier)
+        for index, ligne in enumerate(lecteur):
+            if not ligne[2].isnumeric():
+                pass
+            else: 
+                if annee1 <= ligne[2] <= annee2:
+                    liste_films_annees.append(ligne)
+    print(liste_films_annees)
