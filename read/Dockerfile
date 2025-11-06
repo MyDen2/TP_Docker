@@ -8,4 +8,4 @@ COPY . .
 
 EXPOSE 5000
 
-CMD ["python", "read_data.py"]
+CMD ["tail", "-f", "/dev/null"]

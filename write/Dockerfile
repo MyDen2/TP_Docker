@@ -8,4 +8,4 @@ COPY . .
 
 EXPOSE 5000
 
-CMD ["python", "manip_data.py"]
+CMD ["tail", "-f", "/dev/null"]
