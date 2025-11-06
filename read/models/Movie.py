@@ -1,5 +1,5 @@
 class Movie():
-    id = 31
+    id = 30
 
     def init(self, titre: str, annee_production: int, genre: str, age_limite: int):
         Movie.id += 1
@@ -10,6 +10,7 @@ class Movie():
 
     def __str__(self):
         print("Informations sur ce film")
+        print(f"ID du film : {self.id}")
         print(f"Titre : {self.titre}")
         print(f"Année de production : {self.annee_production}")
         print(f"Genre : {self.genre}")
