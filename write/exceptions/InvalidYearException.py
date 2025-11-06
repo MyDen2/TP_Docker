@@ -1,0 +1,2 @@
+class InvalidYearException():
+    pass
