@@ -1,6 +1,7 @@
 from exceptions.InvalidAgeLimitException import InvalidAgeLimitException
 from exceptions.InvalidYearException import InvalidYearException
 from models.Movie import Movie
+from models.Acteur import Acteur
 import csv
 
 def demander_infos_film(): 
@@ -92,6 +93,34 @@ def supprimer_un_film():
             if index != int(id):  # Exclure la ligne à supprimer
                 writer.writerow(ligne)
 
+def demander_infos_acteur():
+
+    nom = input("Quel est le nom de l'acteur ?")
+    prenom = input("Quel est le prénom de l'acteur ?")
+    age = input("Quel est l'âge de l'acteur ?")
+    if not age.isnumeric():
+        raise InvalidAgeLimitException("L'âge doit être un nombre")
+    acteur = Acteur(nom, prenom, age)
+    return acteur
+
+
+def ajouter_un_acteur():
+    try : 
+        new_actor = demander_infos_acteur()
+    except InvalidAgeLimitException as e : 
+        print(e)
+
+    # Nouvelle ligne à ajouter
+    nouvelle_ligne = [f"{new_actor.id}", f"{new_actor.nom}", f"{new_actor.prenom}", f"{new_actor.age}"]
+
+    # Ouvrir le fichier en mode ajout ('a') et écrire la ligne
+    with open("data/actors.csv", mode='a', newline='', encoding='utf-8') as fichier:
+        writer = csv.writer(fichier)
+        writer.writerow(nouvelle_ligne)
+
+def associer_un_acteur_a_un_film():
+    pass
+
 def choix():
     print("---- Les actions ? ---- ")
     print("1- Ajouter un film")
@@ -102,6 +131,7 @@ def choix():
     if not reponse.isnumeric():
         raise Exception("Le choix doit etre un nombre ")
     return int(reponse)
+
 
 while True:
     reponse = 0
@@ -118,6 +148,8 @@ while True:
         case 3 : 
             supprimer_un_film()
         case 4 : 
+            ajouter_un_acteur()
+        case 5 : 
             exit()
         case _ : 
             print("Ce choix n'existe pas ! ")
