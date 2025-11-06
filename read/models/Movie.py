@@ -3,6 +3,7 @@ class Movie:
 
     def __init__(self, titre: str, annee_production: int, genre: str, age_limite: int):
         Movie.id += 1
+        
         self.titre = titre
         self.annee_production = annee_production
         self.genre = genre

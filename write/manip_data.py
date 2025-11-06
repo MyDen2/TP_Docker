@@ -7,11 +7,11 @@ def demander_infos_film():
     #exceptions pour titre et genre à ajouter plus tard
     titre = input("Quel est le titre du film ?")
     annee_production = input("Quel est la date de production du film ?")
-    if not int(annee_production):
+    if not annee_production.isnumeric():
         raise InvalidYearException("La date doit être un nombre")
     genre = input("Quel est le genre du film ?")
     age_limite = input("Quel est l'âge limite du film ?")
-    if not int(age_limite):
+    if not age_limite.isnumeric():
         raise InvalidAgeLimitException("La date doit être un nombre")
     movie = Movie(titre, annee_production, genre, age_limite)
     return movie
@@ -36,7 +36,7 @@ def ajouter_un_film():
 
 def demander_id_film_a_modifier() -> int:
     id = input("Quel est l'id du film à modifier ?")
-    if not int(id):
+    if not id.isnumeric():
         raise Exception("L'id doit être un nombre")
     with open('data/movies.csv', "r") as f:
         data = list(csv.reader(f))
@@ -76,4 +76,20 @@ def modifier_un_film():
         writer = csv.writer(fichier)
         writer.writerows(lignes)
 
-modifier_un_film()
+def supprimer_un_film(): 
+    try : 
+        id = demander_id_film_a_modifier()
+    except Exception as e: 
+        print(e)
+
+
+    with open("data/movies.csv", "r", newline="", encoding="utf-8") as fichier:
+        lignes = list(csv.reader(fichier))
+
+    with open("data/movies.csv", "w", newline="", encoding="utf-8") as fichier:
+        writer = csv.writer(fichier)
+        for index, ligne in enumerate(lignes):
+            if index != int(id):  # Exclure la ligne à supprimer
+                writer.writerow(ligne)
+
+
