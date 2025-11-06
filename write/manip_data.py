@@ -119,7 +119,33 @@ def ajouter_un_acteur():
         writer.writerow(nouvelle_ligne)
 
 def associer_un_acteur_a_un_film():
-    pass
+    id_film = input("Quel est l'id du film ?")
+    id_acteur = input("Quel est l'id de l'acteur ?")
+    id = input("Quel est l'id du film à modifier ?")
+    if (not id_film.isnumeric()) or (not id_acteur.isnumeric()):
+        raise Exception("L'id doit être un nombre")
+    #ouverture csv acteurs
+    with open('data/actors.csv', "r") as f:
+        data = list(csv.reader(f))
+        print("Nb de lignes dans le fichier :", len(data))
+        nb_actors = len(data) - 1
+    
+    if 0 > int(id) > nb_actors : 
+        raise Exception("L'id ne correspond à aucun acteur")
+    
+    #ouverture csv films
+    with open('data/movies.csv', "r") as f:
+        data = list(csv.reader(f))
+        print("Nb de lignes dans le fichier :", len(data))
+        nb_films = len(data) - 1
+    
+    if 0 > int(id) > nb_films : 
+        raise Exception("L'id ne correspond à aucun film")
+
+    #ajout dans movies_actors
+
+    
+
 
 def choix():
     print("---- Les actions ? ---- ")
