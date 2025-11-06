@@ -1,0 +1,29 @@
+services:
+
+  read_service:
+    # L'image docker à utiliser pour ce service (ici, la version officiel de mysql)
+    image: image-read
+    container_name: read_python
+    build:
+      context: ./read
+      dockerfile: Dockerfile
+    # Politique de rédémarrage du conteneur. "always" signifie que le conteneur redémarrera automatique si il venait à s'arreter. 
+    restart: always
+    # Montages de volume pour persister les données entre le redémarrages des conteneurs.
+    volumes: 
+      - data_volume:/home/myriam
+
+  write_service:
+    image: image-write
+    container_name: write_python
+    build:
+      context: ./write
+      dockerfile: Dockerfile
+    restart: always
+    volumes: 
+      - data_volume:/home/myriam
+
+# Déclarations des volumes utilisé dans les services
+volumes:
+  # Volume nommée "db_data" pour stocker les données de la bdd MySql
+  data_volume:

@@ -7,7 +7,7 @@ def recuperer_un_film_grace_au_titre():
     with open("data/movies.csv", mode='r', encoding='utf-8') as fichier:
         lecteur = csv.reader(fichier)
         #for index, ligne in enumerate(lecteur, start=1):
-        for ligne in enumerate(lecteur, start=1):
+        for index, ligne in enumerate(lecteur, start=1):
             if ligne[1].lower() == titre:
                 print(f"ID : {ligne[0]}")
                 print(f"Titre : {ligne[1]}")
@@ -59,3 +59,37 @@ def recuperer_liste_entre_deux_annees():
                 if annee1 <= ligne[2] <= annee2:
                     liste_films_annees.append(ligne)
     print(liste_films_annees)
+
+
+def choix():
+    print("---- Les actions ? ---- ")
+    print("1- Récupérer un film grâce au titre")
+    print("2- Récupérer une liste de films grâce à une limite d'âge")
+    print("3- Récupérer une liste de films grâce au genre")
+    print("4- Récupérer une liste de films grâce à deux dates")
+    print("5- Quitter")
+    reponse = input("Quel est votre choix ?")
+    if not reponse.isnumeric():
+        raise Exception("Le choix doit etre un nombre ")
+    return int(reponse)
+
+while True:
+    reponse = 0
+    try : 
+        reponse = choix()
+    except Exception as e: 
+        print(e)
+    
+    match reponse: 
+        case 1 : 
+            recuperer_un_film_grace_au_titre()
+        case 2 : 
+            recuperer_liste_films_grace_limite_age()
+        case 3 : 
+            recuperer_liste_films_grace_genre()
+        case 4 : 
+            recuperer_liste_entre_deux_annees()
+        case 5 : 
+            exit()
+        case _ : 
+            print("Ce choix n'existe pas ! ")

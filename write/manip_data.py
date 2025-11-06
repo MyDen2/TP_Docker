@@ -92,4 +92,33 @@ def supprimer_un_film():
             if index != int(id):  # Exclure la ligne à supprimer
                 writer.writerow(ligne)
 
+def choix():
+    print("---- Les actions ? ---- ")
+    print("1- Ajouter un film")
+    print("2- Modifier un film")
+    print("3- Supprimer un film")
+    print("4- Quitter")
+    reponse = input("Quel est votre choix ?")
+    if not reponse.isnumeric():
+        raise Exception("Le choix doit etre un nombre ")
+    return int(reponse)
 
+while True:
+    reponse = 0
+    try : 
+        reponse = choix()
+    except Exception as e: 
+        print(e)
+    
+    match reponse: 
+        case 1 : 
+            ajouter_un_film()
+        case 2 : 
+            modifier_un_film()
+        case 3 : 
+            supprimer_un_film()
+        case 4 : 
+            exit()
+        case _ : 
+            print("Ce choix n'existe pas ! ")
+        
