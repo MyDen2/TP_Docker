@@ -1,2 +1,2 @@
-class InvalidYearException():
+class InvalidYearException(Exception):
     pass

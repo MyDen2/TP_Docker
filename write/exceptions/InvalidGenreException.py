@@ -1,2 +1,2 @@
-class InvalidGenreException():
+class InvalidGenreException(Exception):
     pass
